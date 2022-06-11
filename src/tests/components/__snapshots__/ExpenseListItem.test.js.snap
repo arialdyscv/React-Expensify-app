@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render ExpenseListItem with expense index 0 1`] = `
+<div>
+  <Link
+    replace={false}
+    to="/edit/1"
+  >
+    <h3>
+      water bill
+    </h3>
+  </Link>
+  <p>
+    1500
+     - 
+    0
+  </p>
+</div>
+`;
