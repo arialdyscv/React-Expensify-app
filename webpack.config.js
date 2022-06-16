@@ -8,8 +8,9 @@ module.exports = (env, argv) => {
     return {
         entry: "./src/app.js",
         output: {
-        path: path.join(__dirname, "public"),
+        path: path.join(__dirname, "public", "dist"),
         filename: "bundle.js",
+        publicPath: "/dist/"
       },
       module: {
         rules: [
@@ -41,7 +42,7 @@ module.exports = (env, argv) => {
         new MiniCssExtractPlugin({
           filename: 'styles.css',
           chunkFilename: 'app.css'
-        })
+        }),
       ],
       mode:"development",
       devtool: isProduction? "source-map" : "inline-cheap-module-source-map",
@@ -49,11 +50,9 @@ module.exports = (env, argv) => {
         extensions: ['.js', '.jsx', '.scss']
       },
       devServer: {
-        static:{
-          directory: path.join(__dirname, "public") },
-          compress: true,
-          port: 9000,
-        historyApiFallback: true, //telling we're using clientside
+        static: path.join(__dirname, "public"),
+        compress: true,
+        historyApiFallback: true, //telling we're using clientside´
       },
     }
  
