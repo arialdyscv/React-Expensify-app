@@ -18,6 +18,7 @@ export const addExpense = (expense) => ({
 //   createdAt,
 // },
 
+//ADDS to the Database
 export const startAddExpense = (expenseData = {}) => {
   return (dispatch) => {
     const {
@@ -45,6 +46,7 @@ export const removeExpense = ({ id } = {}) => ({
   id
 });
 
+//REMOVES from Database
 export const startRemoveExpense = ( { id } = {}) => {
   return (dispatch) => {
 
@@ -62,13 +64,22 @@ export const editExpense = (id, updates) => ({
   updates,
 });
 
+export const startEditExpense = ( id, updates ) => {
+  return (dispatch) => {
+
+    return update(ref(DB, `expenses/${id}`), updates).then(() => {
+      dispatch(editExpense(id, updates));
+    });
+  }
+}
+
 //SET_EXPENSES
 export const setExpenses = (expenses) => ({
   type: "SET_EXPENSES",
   expenses
 });
 
-
+//GETS list of expenses from Database
 export const statSetExpenses = () => {
   return (dispatch) => {
     const dbRef = ref(DB);

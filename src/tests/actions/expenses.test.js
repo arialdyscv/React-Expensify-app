@@ -1,7 +1,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { startAddExpense, addExpense, editExpense, 
-  removeExpense, setExpenses, statSetExpenses, startRemoveExpense } from "../../actions/expenses";
+  removeExpense, setExpenses, statSetExpenses, startRemoveExpense, startEditExpense } from "../../actions/expenses";
 import expenses from "../fixtures/expenses";
 import { DB } from '../../firebase/firebase';
 import { ref, get, set } from 'firebase/database';
@@ -16,7 +16,7 @@ beforeEach(done => {
   set(ref(DB, 'expenses'), expenseDummy).then(() => done());
 });
 
-test("should setup remove expense object", () => {
+test('should setup remove expense object', () => {
   const action = removeExpense({ id: "123abc" });
   expect(action).toEqual({
     type: "REMOVE_EXPENSE",
@@ -24,7 +24,7 @@ test("should setup remove expense object", () => {
   });
 });
 
-test('should remove expense from firebase', done =>{
+test('should remove expense from database', done =>{
   const store = createMockStore({});
   const id = expenses[2].id;
 
@@ -41,7 +41,7 @@ test('should remove expense from firebase', done =>{
   });
 })
 
-test("should setup edit expense action object", () => {
+test('should setup edit expense action object', () => {
   const action = editExpense("123abc", { note: "culito" });
   expect(action).toEqual({
     type: "EDIT_EXPENSE",
@@ -52,7 +52,27 @@ test("should setup edit expense action object", () => {
   });
 });
 
-test("should setup add expense action object", () => {
+test('should edit expense to database', done => {
+  const store = createMockStore({});
+  const id = expenses[0].id;
+  const updates = { note: 'almost there!' };
+
+  store.dispatch(startEditExpense( id, updates)).then(() => {
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({
+      type: 'EDIT_EXPENSE',
+      id,
+      updates
+    });
+
+    return get(ref(DB, `expenses/${id}`))
+  }).then((snapshot) => {
+    expect(snapshot.val().note).toBe(updates.note);
+    done();
+  });
+})
+
+test('should setup add expense action object', () => {
  
   const action = addExpense(expenses[1]);
   expect(action).toEqual({
