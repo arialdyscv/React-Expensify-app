@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "Arialdys Calderon",
   "license": "MIT",
+  "engines": {
+    "yarn": "1.22.18"
+  },
   "scripts": {
     "comment": "use --config webpack.prod.js or --config webpack.dev.js to use divided files environment",
     "build-pro": "webpack --mode production ",
