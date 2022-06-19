@@ -11,7 +11,7 @@ if(process.env.NODE_ENV === 'test') {
   require('dotenv').config({path: '.env.development'});
 }
 
-
+// __dirname will show you the full path of the file
 module.exports = (env, argv) => {
     const isProduction = argv.mode === 'production';
     return {

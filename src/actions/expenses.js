@@ -51,3 +51,32 @@ export const editExpense = (id, updates) => ({
   id,
   updates,
 });
+
+//SET_EXPENSES
+export const setExpenses = (expenses) => ({
+  type: "SET_EXPENSES",
+  expenses
+});
+
+
+export const statSetExpenses = () => {
+  return (dispatch) => {
+    const dbRef = ref(DB);
+    return get(child(dbRef, 'expenses')).then((snapshot) => {
+      if(snapshot.exists()) {
+        const expenses = []
+        snapshot.forEach((childSnap) => {
+          expenses.push({
+            id: childSnap.key,
+            ...childSnap.val(),
+          });
+        });
+        dispatch(setExpenses(expenses))
+      } else {
+        console.log('No Expenses')
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+}
