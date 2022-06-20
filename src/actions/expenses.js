@@ -20,7 +20,9 @@ export const addExpense = (expense) => ({
 
 //ADDS to the Database
 export const startAddExpense = (expenseData = {}) => {
-  return (dispatch) => {
+  //getState function to get the uid of the user
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid
     const {
       description = "",
       note = "",
@@ -30,7 +32,7 @@ export const startAddExpense = (expenseData = {}) => {
 
     const expense = { description, note, amount, createdAt};
 
-    return push(ref(DB,'expenses'), expense).then((ref) => {
+    return push(ref(DB,`users/${uid}/expenses`), expense).then((ref) => {
       dispatch(addExpense({
         id: ref.key,
         ...expense
@@ -48,9 +50,9 @@ export const removeExpense = ({ id } = {}) => ({
 
 //REMOVES from Database
 export const startRemoveExpense = ( { id } = {}) => {
-  return (dispatch) => {
-
-    return remove(ref(DB), `expenses/${id}`).then(() => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid
+    return remove(ref(DB), `users/${uid}/expenses/${id}`).then(() => {
       dispatch(removeExpense({ id }));
 
     });
@@ -65,9 +67,9 @@ export const editExpense = (id, updates) => ({
 });
 
 export const startEditExpense = ( id, updates ) => {
-  return (dispatch) => {
-
-    return update(ref(DB, `expenses/${id}`), updates).then(() => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return update(ref(DB, `users/${uid}/expenses/${id}`), updates).then(() => {
       dispatch(editExpense(id, updates));
     });
   }
@@ -81,9 +83,10 @@ export const setExpenses = (expenses) => ({
 
 //GETS list of expenses from Database
 export const statSetExpenses = () => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid
     const dbRef = ref(DB);
-    return get(child(dbRef, 'expenses')).then((snapshot) => {
+    return get(child(dbRef, `users/${uid}/expenses`)).then((snapshot) => {
       if(snapshot.exists()) {
         const expenses = []
         snapshot.forEach((childSnap) => {
