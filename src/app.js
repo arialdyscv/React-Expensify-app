@@ -6,6 +6,7 @@ import configureStore from "./store/configureStore";
 import { statSetExpenses } from "./actions/expenses";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { login, logout } from "./actions/auth";
+import LoadingPage from "./components/LoadingPage";
 import "normalize.css/normalize.css"; //dependency makes all browsers to start from the same place
 import "./styles/styles.scss"; //loading the css file to render
 import "react-dates/initialize"; //to initialize the dates
@@ -29,14 +30,14 @@ const renderApp = () => {
   }
 };
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById("app"));
+ReactDOM.render(<LoadingPage/>, document.getElementById("app"));
 
 const Auth = getAuth();
 
 onAuthStateChanged(Auth, (user) => {
   if(user) {
     //User is signed in
-    console.log( user.uid, 'user is logged in')
+    //console.log( user.uid, 'user is logged in')
     store.dispatch(login(user.uid));
     store.dispatch(statSetExpenses()).then(() => {
       renderApp();
@@ -46,7 +47,7 @@ onAuthStateChanged(Auth, (user) => {
     });
   } else {
     //user is signed out
-    console.log('user is logged out')
+    //console.log('user is logged out')
     store.dispatch(logout());
     renderApp();
     history.push('/');//when the user logout will be redirected to rootpage

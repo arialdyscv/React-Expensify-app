@@ -1,0 +1,39 @@
+.button {
+    background: #005590;
+    border: none;
+    color: white;
+    display: inline-block;
+    font-size: $font-size-large;
+    line-height: 1;
+    padding: $s-size;
+    text-decoration: none;
+    transition: $regular-transition;
+    &:hover {
+        
+        background: #007590;
+    }
+}
+
+.button--login {
+    background: $dark-grey;
+}
+
+.button--logout {
+    background: none;
+    font-weight: 300;
+    transition: $regular-transition;
+    &:hover {
+        background: none;
+        color: red;
+    }
+}
+
+.button--secondary {
+    background: #888888;
+    transition: $regular-transition;
+    &:hover {
+        
+        background: red;
+    }
+
+}

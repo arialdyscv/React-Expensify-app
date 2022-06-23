@@ -4,10 +4,13 @@ import { startLogin } from '../actions/auth';
 
 
 export const LoginPage = ({ startLogin }) => (
-    <div>
-        <h1>Login Page</h1>
-        <h3>Please Login</h3>
-        <button onClick={startLogin}>Log in with Google</button>
+    <div className='box-layout'>
+        <div className='box-layout__box'>
+            <h1 className='box-layout__title'>Expensify App</h1>
+            <h3>Time to record your expenses</h3>
+            <button className='button button--login' onClick={startLogin}>Login with Google</button>
+        </div>
+      
     </div>
 );
 

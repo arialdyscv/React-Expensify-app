@@ -1,0 +1,22 @@
+.box-layout {
+    align-items: center;//justify whats inside to the center (top-bottom)
+    background: black; //for an image to render in the browser use url(/images/pic);
+    background-size: cover;//makes sure cover entire box layout
+    display: flex;//set the display as flex
+    height: 100vh;
+    justify-content: center;//justify whats inside to the center (sides)
+    width: 100vw;
+}
+
+.box-layout__box {
+    background: fade-out($color: white, $amount: 0.15);
+    border-radius: 3px;
+    padding: $l-size $m-size;
+    text-align: center;//aligns the text as specify
+    width: 25rem;//rem: Equal to the computed value of font-size on the root element
+}
+
+.box-layout__title {
+    margin: 0 0 $m-size 0;
+    line-height: 1;//space betwen text
+}

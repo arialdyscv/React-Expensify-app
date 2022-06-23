@@ -1,0 +1,6 @@
+.content-container {
+    margin: 0 auto; //auto distributes (in this case the left and right) evenly
+    padding: 0 $m-size;//kepp the content from starting on the sides of the page 
+    max-width: 80rem;
+
+}

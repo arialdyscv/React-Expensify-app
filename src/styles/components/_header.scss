@@ -1,0 +1,19 @@
+.header {
+    background: $dark-blue;
+
+}
+.header__content {
+    align-items: center; 
+    //self explanatory but basically centers the content evenly from all sides in the container
+    display: flex;
+    justify-content: space-between;//makes a space in between the contents
+    padding: $s-size 0;
+
+}
+.header__title {
+    color: white;
+    text-decoration: none; //remove the default styles for links
+    h1 {//targets the h1 inside the header component
+        margin: 0;
+    }
+}

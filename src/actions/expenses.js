@@ -1,8 +1,6 @@
-import uuid from "uuid";
-import { App, DB } from "../firebase/firebase"; 
-import { 
-  getDatabase, ref, get, set, update, remove, push, onValue, off, child, 
-  onChildRemoved, onChildChanged, onChildAdded } from 'firebase/database';
+//import uuid from "uuid";
+import { DB } from "../firebase/firebase"; 
+import { ref, get, set, update, remove, push, child } from 'firebase/database';
 
 // ADD_EXPENSE
 export const addExpense = (expense) => ({
@@ -22,7 +20,7 @@ export const addExpense = (expense) => ({
 export const startAddExpense = (expenseData = {}) => {
   //getState function to get the uid of the user
   return (dispatch, getState) => {
-    const uid = getState().auth.uid
+    const uid = getState().auth.uid //this will give us access to the user id (uid)
     const {
       description = "",
       note = "",
@@ -52,7 +50,7 @@ export const removeExpense = ({ id } = {}) => ({
 export const startRemoveExpense = ( { id } = {}) => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid
-    return remove(ref(DB), `users/${uid}/expenses/${id}`).then(() => {
+    return remove(ref(DB, `users/${uid}/expenses/${id}`)).then(() => {
       dispatch(removeExpense({ id }));
 
     });
