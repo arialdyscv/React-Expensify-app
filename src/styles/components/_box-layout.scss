@@ -1,22 +1,95 @@
 .box-layout {
-    align-items: center;//justify whats inside to the center (top-bottom)
-    background: black; //for an image to render in the browser use url(/images/pic);
-    background-size: cover;//makes sure cover entire box layout
-    display: flex;//set the display as flex
-    height: 100vh;
-    justify-content: center;//justify whats inside to the center (sides)
-    width: 100vw;
+  align-items: center; //justify whats inside to the center (top-bottom)
+  background: none; //for an image to render in the browser use url(/images/pic);
+  background-size: cover; //makes sure cover entire box layout
+  display: flex; //set the display as flex
+  height: 100vh;
+  justify-content: center; //justify whats inside to the center (sides)
+  width: 100vw;
+}
+
+@mixin animate($animation, $ease, $time, $var, $alt) {
+  animation: $animation $ease $time $var, $alt;
+}
+
+@mixin keyframes($name) {
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+.login-bg {
+  @include keyframes(slide) {
+    0% {
+      transform: translateX(-25%);
+    }
+    100% {
+      transform: translateX(25%);
+    }
+  }
+  @include animate(slide, 3s, ease-in-out, infinite, alternate);
+  animation: slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, #005590 50%, #007590 50%);
+  bottom: 0;
+  left: -50%;
+  opacity: 0.5;
+  position: fixed;
+  right: -50%;
+  top: 0;
+  z-index: -1;
+}
+
+.login-bg_bg2 {
+  @include keyframes(slide) {
+    0% {
+      transform: translateX(-25%);
+    }
+    100% {
+      transform: translateX(25%);
+    }
+  }
+  @include animate(slide, 4s, ease-in-out, infinite, alternate-reverse);
+  animation: slide 4s ease-in-out infinite alternate-reverse;
+  background-image: linear-gradient(-60deg, #005590 50%, #007590 50%);
+  bottom: 0;
+  left: -50%;
+  opacity: 0.5;
+  position: fixed;
+  right: -50%;
+  top: 0;
+  z-index: -1;
+}
+
+.login-bg_bg3 {
+  @include keyframes(slide) {
+    0% {
+      transform: translateX(-25%);
+    }
+    100% {
+      transform: translateX(25%);
+    }
+  }
+  @include animate(slide, 5s, ease-in-out, infinite, alternate-reverse);
+  animation: slide 5s ease-in-out infinite alternate-reverse;
+  background-image: linear-gradient(-60deg, #007590 50%, #005590 50%);
+  bottom: 0;
+  left: -50%;
+  opacity: 0.5;
+  position: fixed;
+  right: -50%;
+  top: 0;
+  z-index: -1;
 }
 
 .box-layout__box {
-    background: fade-out($color: white, $amount: 0.15);
-    border-radius: 3px;
-    padding: $l-size $m-size;
-    text-align: center;//aligns the text as specify
-    width: 25rem;//rem: Equal to the computed value of font-size on the root element
+  background: fade-out($color: white, $amount: 0.15);
+  border-radius: 3px;
+  padding: $l-size $m-size;
+  text-align: center; //aligns the text as specify
+  width: 25rem; //rem: Equal to the computed value of font-size on the root element
 }
 
 .box-layout__title {
-    margin: 0 0 $m-size 0;
-    line-height: 1;//space betwen text
+  margin: 0 0 $m-size 0;
+  line-height: 1; //space betwen text
 }
