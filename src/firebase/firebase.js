@@ -1,30 +1,39 @@
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
-import { GoogleAuthProvider, getAuth } from 'firebase/auth';
-import { 
-    getDatabase, 
-    ref, get, set, 
-    update, remove, push, 
-    onValue, off, child, 
-    onChildRemoved, onChildChanged, onChildAdded } from 'firebase/database';
+import { initializeApp } from "firebase/app";
+import { GoogleAuthProvider, getAuth } from "firebase/auth";
+import {
+  getDatabase,
+  ref,
+  get,
+  set,
+  update,
+  remove,
+  push,
+  onValue,
+  off,
+  child,
+  onChildRemoved,
+  onChildChanged,
+  onChildAdded,
+} from "firebase/database";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.FIREBASE_DATABASE_URL,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_API_ID
+  apiKey: "AIzaSyBQg-cAcpNtwJRSJ6EO8Dep3jDRc0n-JVY",
+  authDomain: "expensify-app-76788.firebaseapp.com",
+  databaseURL: "https://expensify-app-76788-default-rtdb.firebaseio.com",
+  projectId: "expensify-app-76788",
+  storageBucket: "expensify-app-76788.appspot.com",
+  messagingSenderId: "167442717125",
+  appId: "1:167442717125:web:a721ab8ab7c109e01093ac",
 };
 
 // Initialize Firebase
 export const App = initializeApp(firebaseConfig);
 export const DB = getDatabase();
 export const googleAuthProvider = new GoogleAuthProvider();
-export const Auth = getAuth(); 
+export const Auth = getAuth();
 //const RefDB = ref(DB);
 
 //changed child
@@ -39,13 +48,11 @@ export const Auth = getAuth();
 //     console.log(snapshot.key, snapshot.val());
 // });
 
-
 //removed child
 
 // onChildRemoved(ref(DB, 'expenses'),(snapshot) => {
 //     console.log(snapshot.key, snapshot.val());
 // });
-
 
 //get data once
 
@@ -62,7 +69,6 @@ export const Auth = getAuth();
 //     console.log(expenses);
 // });
 
-
 //get data and stay connected.
 
 // onValue(ref(DB, 'expenses'),(snapshot) => {
@@ -71,11 +77,10 @@ export const Auth = getAuth();
 //         expenses.push({
 //             id: childSnap.key,
 //             ...childSnap.val()
-//         });    
+//         });
 //     });
 //     console.log(expenses);
 // });
-
 
 // push(ref(DB, 'expenses'),
 //     {
@@ -83,7 +88,7 @@ export const Auth = getAuth();
 //         note: 'note 1',
 //         amount: 150,
 //         createdAt: 0,
-      
+
 //     }
 // );
 
@@ -91,13 +96,12 @@ export const Auth = getAuth();
 
 //remove(ref(DB,'notes/-N4npG19f6K4qW6r8Gy3'))
 
-//adding data to database 
+//adding data to database
 // push(ref(DB, 'notes'), {
 //         title: 'two note',
 //         body: 'something new'
 //     }
 // )
-
 
 //this method gets saved but the ID is the index of the array which is not ideal, therefore not used
 /*const notes = [{id: '1', title: 'one note'}, {id: '2', title: 'two note'}];
@@ -113,8 +117,7 @@ set(ref(DB,'notes'), notes);*/
 //     }
 // );
 
-
-// set(ref(DB), { 
+// set(ref(DB), {
 //     name:'Arialdiino',
 //     age: 31,
 //     hasCovid: false,
@@ -142,7 +145,6 @@ set(ref(DB,'notes'), notes);*/
 //     console.log('Update failed: ', e)
 // });
 
-
 // remove(ref(DB, 'hasCovid'))
 // .then(() => {
 //     console.log('data deleted.')
@@ -150,13 +152,9 @@ set(ref(DB,'notes'), notes);*/
 //     console.log( 'Error: ', e)
 // });
 
-
 // update(ref(DB), { 'attributes/weight': 170 })
 // .then(() => {
 //     console.log('data updated')
 // }).catch((e) => {
 //     console.log( 'Update failed: ', e)
 // });
-
-
-
